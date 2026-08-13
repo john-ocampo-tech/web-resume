@@ -158,7 +158,7 @@ const ResumeView = (_props: { resume?: Resume }) => {
   );
 };
 
-/* ==================== CONTACT VIEW (FUNCTIONAL + PREMIUM) ==================== */
+/* ==================== CONTACT VIEW ==================== */
 const ContactView = ({ resume }: { resume: Resume }) => {
   const form = useRef<HTMLFormElement>(null);
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
@@ -218,48 +218,27 @@ const ContactView = ({ resume }: { resume: Resume }) => {
               <input name="name" type="text" required placeholder="Your name" className="contact-input" style={{ width: '100%', padding: '12px', borderRadius: '6px', border: '1px solid #e4e1d7', backgroundColor: '#fcfbf8', fontSize: '0.75rem', outline: 'none' }} />
             </div>
             <div className="input-group">
-              <label style={{ fontSize: '0.55rem', fontWeight: '700', textTransform: 'uppercase', color: '#6e746e', marginBottom: '6px', display: 'block' }}>Email Address</label>
+              <label style={{ fontSize: '0.55rem', fontWeight: '700', textTransform: 'uppercase', color: '#6e746e', marginBottom: '6px', display: 'block' }}>Email</label>
               <input name="reply_to" type="email" required placeholder="Your email" className="contact-input" style={{ width: '100%', padding: '12px', borderRadius: '6px', border: '1px solid #e4e1d7', backgroundColor: '#fcfbf8', fontSize: '0.75rem', outline: 'none' }} />
             </div>
           </div>
-          
           <div className="input-group" style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
             <label style={{ fontSize: '0.55rem', fontWeight: '700', textTransform: 'uppercase', color: '#6e746e', marginBottom: '6px', display: 'block' }}>Message</label>
             <textarea name="message" required placeholder="Send me a message..." className="contact-input" style={{ width: '100%', flex: 1, padding: '12px', borderRadius: '6px', border: '1px solid #e4e1d7', backgroundColor: '#fcfbf8', fontSize: '0.75rem', outline: 'none', resize: 'none' }} />
           </div>
-
-          <button 
-            type="submit" 
-            disabled={status !== 'idle'} 
-            className="submit-btn" 
-            style={{
-              alignSelf: 'flex-start', height: '42px', minWidth: '160px', borderRadius: '8px', border: 'none',
-              backgroundColor: status === 'success' ? '#5b7c6f' : status === 'error' ? '#a35d5d' : '#1a1f1c',
-              color: '#ffffff', fontWeight: '600', fontSize: '0.7rem', letterSpacing: '0.1em', cursor: 'pointer',
-              overflow: 'hidden', transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
-              transform: status === 'sending' ? 'scale(0.96)' : 'scale(1)', padding: 0
-            }}
-          >
-            <div style={{
-              display: 'flex', flexDirection: 'column', transition: 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)',
-              transform: status === 'idle' ? 'translateY(0)' : status === 'sending' ? 'translateY(-42px)' : 'translateY(-84px)'
-            }}>
+          <button type="submit" disabled={status !== 'idle'} className="submit-btn" style={{ alignSelf: 'flex-start', padding: 0, height: '42px', minWidth: '160px', borderRadius: '8px', border: 'none', backgroundColor: status === 'success' ? '#5b7c6f' : status === 'error' ? '#a35d5d' : '#1a1f1c', color: '#ffffff', fontWeight: '600', fontSize: '0.7rem', letterSpacing: '0.08em', cursor: 'pointer', overflow: 'hidden' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', transition: 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)', transform: status === 'idle' ? 'translateY(0)' : status === 'sending' ? 'translateY(-42px)' : 'translateY(-84px)' }}>
               <div style={{ height: '42px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
                 <span>SEND MESSAGE</span>
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polyline points="22 2 15 22 11 13 2 9 22 2"/></svg>
               </div>
               <div style={{ height: '42px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <span>SENDING...</span>
+                <span className="loading-text">SENDING...</span>
               </div>
               <div style={{ height: '42px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
                 {status === 'success' ? (
-                  <>
-                    <span>MESSAGE SENT!</span>
-                    <svg width="12" height="10" viewBox="0 0 12 10" fill="none"><path d="M1.5 5L4.5 8L10.5 2" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                  </>
-                ) : (
-                  <span>ERROR - RETRY?</span>
-                )}
+                  <><span>MESSAGE SENT!</span><svg width="12" height="10" viewBox="0 0 12 10" fill="none"><path d="M1.5 5L4.5 8L10.5 2" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/></svg></>
+                ) : ( <span>ERROR - RETRY?</span> )}
               </div>
             </div>
           </button>
@@ -269,7 +248,7 @@ const ContactView = ({ resume }: { resume: Resume }) => {
   );
 };
 
-/* ==================== CONTACT INFO CARD (COPYABLE) ==================== */
+/* ==================== CONTACT INFO CARD ==================== */
 const ContactInfoCard = ({ icon, label, value }: { icon: any, label: string, value?: string }) => {
   const [copied, setCopied] = useState(false);
   const handleCopy = () => {
@@ -303,15 +282,31 @@ const ContactInfoCard = ({ icon, label, value }: { icon: any, label: string, val
 /* ==================== SERVICE BOX ==================== */
 const ServiceBox = ({ icon, title, desc }: { icon: ReactNode, title: string, desc: string }) => (
   <div className="service-box" style={{ 
-    padding: '18px', borderRadius: '8px', backgroundColor: '#fcfbf8', border: '1px solid #e4e1d7',
-    display: 'flex', flexDirection: 'column', justifyContent: 'center'
+    padding: '20px', 
+    borderRadius: '12px', 
+    backgroundColor: '#fcfbf8', 
+    border: '1px solid #e4e1d7',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    height: '100%',
+    boxSizing: 'border-box'
   }}>
     <div className="icon-wrapper" style={{ 
-      color: '#5b7c6f', marginBottom: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', 
-      width: '34px', height: '34px', borderRadius: '6px', backgroundColor: 'rgba(91, 124, 111, 0.1)' 
+      color: '#5b7c6f', 
+      marginBottom: '16px', 
+      display: 'flex', 
+      alignItems: 'center', 
+      justifyContent: 'center', 
+      width: '40px', 
+      height: '40px', 
+      borderRadius: '10px', 
+      backgroundColor: 'rgba(91, 124, 111, 0.05)',
+      border: '1px solid transparent',
+      flexShrink: 0
     }}>{icon}</div>
-    <h4 style={{ margin: '0 0 4px 0', fontSize: '0.9rem', color: '#1d211e', fontWeight: '500' }}>{title}</h4>
-    <p style={{ margin: 0, fontSize: '0.825rem', color: '#6e746e', lineHeight: 1.45 }}>{desc}</p>
+    <h4 style={{ margin: '0 0 6px 0', fontSize: '0.9rem', color: '#1d211e', fontWeight: '600', letterSpacing: '-0.01em' }}>{title}</h4>
+    <p style={{ margin: 0, fontSize: '0.825rem', color: '#6e746e', lineHeight: 1.5 }}>{desc}</p>
   </div>
 );
 
