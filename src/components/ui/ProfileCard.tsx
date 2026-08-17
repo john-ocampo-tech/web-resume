@@ -1,12 +1,14 @@
+/* ==================== SECTION 1: IMPORTS ==================== */
 import type { Resume } from '../../types/resume';
-import type { ReactNode } from 'react';
 import profilePic from '../../assets/frontprofile.png';
 
+/* ==================== SECTION 2: TYPES ==================== */
 interface ProfileCardProps {
   resume: Resume;
   onContactClick?: () => void;
 }
 
+/* ==================== SECTION 3: MAIN COMPONENT ==================== */
 export const ProfileCard = ({ resume, onContactClick }: ProfileCardProps) => {
   return (
     <div style={{
@@ -19,6 +21,8 @@ export const ProfileCard = ({ resume, onContactClick }: ProfileCardProps) => {
       flexDirection: 'column',
       borderRight: '1px solid #e4e1d7'
     }}>
+      
+      {/* --- SUB-SECTION: HOVER STYLES --- */}
       <style>{`
         .card-action-btn {
           position: relative;
@@ -73,6 +77,7 @@ export const ProfileCard = ({ resume, onContactClick }: ProfileCardProps) => {
         }
       `}</style>
 
+      {/* --- SUB-SECTION: PROFILE IMAGE --- */}
       <div style={{ 
         flex: 1, 
         backgroundColor: '#f6f5f0', 
@@ -93,8 +98,9 @@ export const ProfileCard = ({ resume, onContactClick }: ProfileCardProps) => {
         />
       </div>
 
+      {/* --- SUB-SECTION: NAME & TITLE (Icons were removed from here) --- */}
       <div style={{ 
-        padding: '24px 16px 0', 
+        padding: '24px 16px', 
         textAlign: 'center', 
         display: 'flex', 
         flexDirection: 'column', 
@@ -116,18 +122,13 @@ export const ProfileCard = ({ resume, onContactClick }: ProfileCardProps) => {
           letterSpacing: '0.05em',
           textTransform: 'uppercase',
           fontSize: '0.7rem',
-          marginBottom: '20px' 
+          marginBottom: '12px' 
         }}>
           {resume.title}
         </p>
-
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '8px', marginBottom: '24px' }}>
-          <SocialButton><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10z"/></svg></SocialButton> 
-          <SocialButton><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></SocialButton> 
-          <SocialButton><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></SocialButton>
-        </div>
       </div>
 
+      {/* ==================== SECTION 4: ACTION BUTTONS ==================== */}
       <div style={{ display: 'flex', borderTop: '1px solid #e4e1d7', flexShrink: 0, backgroundColor: '#dbe4de' }}>
         <a 
           href="/resume.pdf" 
@@ -149,20 +150,5 @@ export const ProfileCard = ({ resume, onContactClick }: ProfileCardProps) => {
   );
 };
 
-const SocialButton = ({ children }: { children: ReactNode }) => (
-  <span style={{ 
-    cursor: 'pointer', 
-    color: '#6e746e',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: '32px',
-    height: '32px',
-    borderRadius: '6px', 
-    backgroundColor: 'transparent',
-    border: '1px solid #e4e1d7',
-    transition: 'all 0.2s ease'
-  }}>
-    {children}
-  </span>
-);
+/* ==================== SECTION 5: HELPERS ==================== */
+/* (SocialButton helper was removed from here) */
